@@ -1,0 +1,36 @@
+package KieRule;
+import com.billcom.drools.model.Employees;
+import java.util.Calendar;
+global Integer currentYear;
+
+rule "Senior Employees"
+when
+    employee : Employees(experienceInCurrentDomain >= 4)
+then
+    employee.setPaymentTier(3);
+    System.out.println("Senior Employee: " + employee);
+end
+
+rule "Promote High Experience Employees"
+when
+    employee : Employees(experienceInCurrentDomain >= 4, paymentTier == 2)
+then
+    employee.setPaymentTier(3);
+    System.out.println("Promoted to Senior: " + employee);
+end
+
+rule "Retirement Ready Employees"
+when
+    employee : Employees(age >= 60)
+then
+    employee.setLeaveOrNot(1);
+    System.out.println("Ready for Retirement: " + employee);
+end
+
+rule "Long-Term Employee"
+when
+    employee : Employees( joiningyear < 2019 )
+then
+    employee.setPaymentTier(3);
+    System.out.println("Long-Term Employee: " + employee);
+end
