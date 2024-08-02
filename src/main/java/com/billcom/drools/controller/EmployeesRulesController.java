@@ -39,6 +39,13 @@ public class EmployeesRulesController {
     }
 
     @CrossOrigin(origins = "*")
+    @PostMapping(value = "/post")
+    public Employees post(@RequestBody Employees emp) {
+        Employees created = service.create(emp);
+        return created;
+    }
+
+    @CrossOrigin(origins = "*")
     @GetMapping(value = "/getAllUser")
     public List<Employees> getAllUser() {
         return emprep.findAll();
